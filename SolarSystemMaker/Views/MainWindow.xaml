@@ -1,0 +1,81 @@
+<Window x:Class="SolarSystemMaker.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:SolarSystemLibrary="clr-namespace:SolarSystemLibrary;assembly=SolarSystemLibrary"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" Title="MainWindow" Height="600" Width="1024"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ViewModels="clr-namespace:SolarSystemMaker.ViewModels" 
+        xmlns:Views="clr-namespace:SolarSystemMaker.Views">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="Spacing" TargetType="{x:Type Control}">
+                <Setter Property="Control.Margin" Value="5,5,5,5" />
+            </Style>
+            <ObjectDataProvider x:Key="StarCategories" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:TypeExtension Type="SolarSystemLibrary:StarCategory" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--<ScrollViewer Grid.Row="0">
+            <TextBlock x:Name="Block"></TextBlock>
+        </ScrollViewer>-->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+                <DockPanel Grid.Row="0" Grid.Column="0" >
+                <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Stars" />
+                <TextBox x:Name="NumberOfStars" Style="{StaticResource Spacing}" />
+            </DockPanel>         
+            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="MainSequenceStar" Style="{StaticResource Spacing}" Content="Main Sequence Star?" />
+            <CheckBox Grid.Row="0" Grid.Column="2" x:Name="HabitableStar" Style="{StaticResource Spacing}" Content="Habitable Star?" />
+            <DockPanel Grid.Row="0" Grid.Column="3" >
+                <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Star Color" />
+                <ComboBox x:Name="StarColor" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource StarCategories}}" />
+            </DockPanel>
+            <DockPanel Grid.Row="1" Grid.Column="0" >
+                <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Planets" />
+                <TextBox x:Name="NumPlanets" Style="{StaticResource Spacing}" />
+            </DockPanel>
+            <DockPanel Grid.Row="1" Grid.Column="1" >
+                <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Habitable Planets" />
+                <TextBox x:Name="NumHabitablePlanets" Style="{StaticResource Spacing}" />
+            </DockPanel>
+            <DockPanel Grid.Row="1" Grid.Column="2" >
+                <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Goldilocks Planets" />
+                <TextBox x:Name="NumGoldilocksPlanets" Style="{StaticResource Spacing}" />
+            </DockPanel>
+        </Grid>
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <ListView DockPanel.Dock="Left" Style="{StaticResource Spacing}" ItemsSource="{Binding Path=ViewModels}" SelectedItem="{Binding Path=SelectedViewModel}"  MinWidth="120" DisplayMemberPath="DisplayName"/>
+            <ContentControl Style="{StaticResource Spacing}" Content="{Binding Path=SelectedViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type ViewModels:StarViewModel}">
+                        <Views:StarView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type ViewModels:PlanetViewModel}">
+                        <Views:PlanetView />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </DockPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Click="OnClickGenerate" Margin="5">Generate</Button>
+            <Button Click="OnCopyToClipboard" Margin="5">Copy To Cliboard</Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>
