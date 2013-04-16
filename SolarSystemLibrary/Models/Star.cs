@@ -1,12 +1,12 @@
 // ==========================================================================================================
 // 
-//  File ID: SolarSystemMaker - SolarSystemMaker - Star.cs 
+//  File ID: SolarSystemMaker - SolarSystemLibrary - Star.cs 
 // 
 //  Copyright 2011-2012
 //  WR Medical Electronics Company
 // 
 //  Last Changed By: cdo - Collin D. O'Connor
-//  Last Changed Date: 10:14 AM, 28/03/2013
+//  Last Changed Date: 10:21 AM, 16/04/2013
 // 
 //  Notes:
 //  
@@ -18,35 +18,48 @@ namespace SolarSystemLibrary.Models {
     ///
     /// <remarks>   Cdo, 3/28/2013. </remarks>
     ///
+    /// <seealso cref="SolarSystemLibrary.Models.IStar"/>
     /// <seealso cref="IStar"/>
     ///=================================================================================================
     public class Star : IStar {
+        #region Constructors
+
+        ///=================================================================================================
+        /// <summary>   Default constructor. </summary>
+        ///
+        /// <remarks>   Cdo, 4/16/2013. </remarks>
+        ///=================================================================================================
+        public Star( ) {
+            this.Category = StarCategory.NullCategory;
+            this.MainSequenceStar = true;
+            this.SolarMass = 0.0;
+        }
+
+        #endregion
+
         #region Implementation of IStar
 
         ///=================================================================================================
         /// <summary>   Gets or sets the category. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IStar.Category"/>
         /// <seealso cref="IStar.Category"/>
-        ///
-        /// ### <value> The category. </value>
         ///=================================================================================================
         public StarCategory Category { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets a value indicating whether the main sequence star. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IStar.MainSequenceStar"/>
         /// <seealso cref="IStar.MainSequenceStar"/>
-        ///
-        /// ### <value> true if main sequence star, false if not. </value>
         ///=================================================================================================
         public bool MainSequenceStar { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the solar mass. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IStar.SolarMass"/>
         /// <seealso cref="IStar.SolarMass"/>
-        ///
-        /// ### <value> The solar mass. </value>
         ///=================================================================================================
         public double SolarMass { get; set; }
 
@@ -62,11 +75,8 @@ namespace SolarSystemLibrary.Models {
         ///
         /// <remarks>   Cdo, 3/29/2013. </remarks>
         ///
+        /// <seealso cref="System.Object.ToString()"/>
         /// <seealso cref="object.ToString()"/>
-        ///
-        /// ### <returns>
-        ///     A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
         ///=================================================================================================
         public override string ToString( ) {
             return

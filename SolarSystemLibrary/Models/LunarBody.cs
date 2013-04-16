@@ -1,12 +1,12 @@
 // ==========================================================================================================
 // 
-//  File ID: SolarSystemMaker - SolarSystemMaker - LunarBody.cs 
+//  File ID: SolarSystemMaker - SolarSystemLibrary - LunarBody.cs 
 // 
 //  Copyright 2011-2012
 //  WR Medical Electronics Company
 // 
 //  Last Changed By: cdo - Collin D. O'Connor
-//  Last Changed Date: 12:30 PM, 29/03/2013
+//  Last Changed Date: 10:25 AM, 16/04/2013
 // 
 //  Notes:
 //  
@@ -24,125 +24,135 @@ namespace SolarSystemLibrary.Models {
     ///
     /// <remarks>   Cdo, 3/28/2013. </remarks>
     ///
+    /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody"/>
     /// <seealso cref="IPlanetaryBody"/>
     ///=================================================================================================
     public class LunarBody : IPlanetaryBody {
+        #region Constructors
+
+        ///=================================================================================================
+        /// <summary>   Default constructor. </summary>
+        ///
+        /// <remarks>   Cdo, 4/16/2013. </remarks>
+        ///=================================================================================================
+        public LunarBody( ) {
+            this.PlanetOrder = -1;
+            this.Size = PlanetSize.NullSize;
+            this.Diameter = 0.0;
+            this.Gravity = 0.0;
+            this.Pressure = AtmosphericPressure.Vacuum;
+            this.Temperature = Temperature.Vacuum;
+            this.Toxicity = Toxicity.NobleGas;
+            this.RadiationLevel = -1;
+            this.LiquidSurfacePercentage = 0.0;
+            this.AxialTilt = 0.0;
+        }
+
+        #endregion
+
         #region Implementation of IPlanetaryBody
 
         ///=================================================================================================
         /// <summary>   Gets or sets the size. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Size"/>
         /// <seealso cref="IPlanetaryBody.Size"/>
-        ///
-        /// ### <value> The size. </value>
         ///=================================================================================================
         public PlanetSize Size { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the diameter. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Diameter"/>
         /// <seealso cref="IPlanetaryBody.Diameter"/>
-        ///
-        /// ### <value> The diameter. </value>
         ///=================================================================================================
         public double Diameter { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the gravity. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Gravity"/>
         /// <seealso cref="IPlanetaryBody.Gravity"/>
-        ///
-        /// ### <value> The gravity. </value>
         ///=================================================================================================
         public double Gravity { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the lunar bodies. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.LunarBodies"/>
         /// <seealso cref="IPlanetaryBody.LunarBodies"/>
-        ///
-        /// ### <value> The lunar bodies. </value>
         ///=================================================================================================
         public IList<IPlanetaryBody> LunarBodies { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the planet order. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.PlanetOrder"/>
         /// <seealso cref="IPlanetaryBody.PlanetOrder"/>
-        ///
-        /// ### <value> The planet order. </value>
         ///=================================================================================================
         public int PlanetOrder { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the number of moons. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumMoons"/>
         /// <seealso cref="IPlanetaryBody.NumMoons"/>
-        ///
-        /// ### <value> The total number of moons. </value>
         ///=================================================================================================
         public int NumMoons { get; private set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the number of asteroids. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumAsteroids"/>
         /// <seealso cref="IPlanetaryBody.NumAsteroids"/>
-        ///
-        /// ### <value> The total number of asteroids. </value>
         ///=================================================================================================
         public int NumAsteroids { get; private set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the number of rings. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumRings"/>
         /// <seealso cref="IPlanetaryBody.NumRings"/>
-        ///
-        /// ### <value> The total number of rings. </value>
         ///=================================================================================================
         public int NumRings { get; private set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the pressure. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Pressure"/>
         /// <seealso cref="IPlanetaryBody.Pressure"/>
-        ///
-        /// ### <value> The pressure. </value>
         ///=================================================================================================
         public AtmosphericPressure Pressure { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the temperature. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Temperature"/>
         /// <seealso cref="IPlanetaryBody.Temperature"/>
-        ///
-        /// ### <value> The temperature. </value>
         ///=================================================================================================
         public Temperature Temperature { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the toxicity. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Toxicity"/>
         /// <seealso cref="IPlanetaryBody.Toxicity"/>
-        ///
-        /// ### <value> The toxicity. </value>
         ///=================================================================================================
         public Toxicity Toxicity { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the radiation level. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.RadiationLevel"/>
         /// <seealso cref="IPlanetaryBody.RadiationLevel"/>
-        ///
-        /// ### <value> The radiation level. </value>
         ///=================================================================================================
         public int RadiationLevel { get; set; }
 
         ///=================================================================================================
-        /// <summary>   Gets or sets a value indicating whether this object is habitable. </summary>
+        /// <summary>   Gets a value indicating whether this object is habitable. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Habitable"/>
         /// <seealso cref="IPlanetaryBody.Habitable"/>
-        ///
-        /// ### <value> true if habitable, false if not. </value>
         ///=================================================================================================
         public bool Habitable {
             get { return this.IsHabitable( ); }
@@ -151,36 +161,32 @@ namespace SolarSystemLibrary.Models {
         ///=================================================================================================
         /// <summary>   Gets or sets the occupied. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Occupied"/>
         /// <seealso cref="IPlanetaryBody.Occupied"/>
-        ///
-        /// ### <value> The occupied. </value>
         ///=================================================================================================
         public int Occupied { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the technology level. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.TechnologyLevel"/>
         /// <seealso cref="IPlanetaryBody.TechnologyLevel"/>
-        ///
-        /// ### <value> The technology level. </value>
         ///=================================================================================================
         public TechLevel TechnologyLevel { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the liquid surface percentage. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.LiquidSurfacePercentage"/>
         /// <seealso cref="IPlanetaryBody.LiquidSurfacePercentage"/>
-        ///
-        /// ### <value> The liquid surface percentage. </value>
         ///=================================================================================================
         public double LiquidSurfacePercentage { get; set; }
 
         ///=================================================================================================
         /// <summary>   Gets or sets the axial tilt. </summary>
         ///
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.AxialTilt"/>
         /// <seealso cref="IPlanetaryBody.AxialTilt"/>
-        ///
-        /// ### <value> The axial tilt. </value>
         ///=================================================================================================
         public double AxialTilt { get; set; }
 
@@ -232,11 +238,8 @@ namespace SolarSystemLibrary.Models {
         ///
         /// <remarks>   Cdo, 3/29/2013. </remarks>
         ///
+        /// <seealso cref="System.Object.ToString()"/>
         /// <seealso cref="object.ToString()"/>
-        ///
-        /// ### <returns>
-        ///     A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
         ///=================================================================================================
         public override string ToString( ) {
             return

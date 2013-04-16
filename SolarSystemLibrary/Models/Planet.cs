@@ -1,12 +1,12 @@
 // ==========================================================================================================
 // 
-//  File ID: SolarSystemMaker - SolarSystemMaker - Planet.cs 
+//  File ID: SolarSystemMaker - SolarSystemLibrary - Planet.cs 
 // 
 //  Copyright 2011-2012
 //  WR Medical Electronics Company
 // 
 //  Last Changed By: cdo - Collin D. O'Connor
-//  Last Changed Date: 6:17 AM, 29/03/2013
+//  Last Changed Date: 10:25 AM, 16/04/2013
 // 
 //  Notes:
 //  
@@ -36,7 +36,16 @@ namespace SolarSystemLibrary.Models {
         /// <remarks>   Cdo, 3/29/2013. </remarks>
         ///=================================================================================================
         public Planet( ) {
-            this.PlanetOrder = int.MaxValue;
+            this.PlanetOrder = -1;
+            this.Size = PlanetSize.NullSize;
+            this.Diameter = 0.0;
+            this.Gravity = 0.0;
+            this.Pressure = AtmosphericPressure.Vacuum;
+            this.Temperature = Temperature.Vacuum;
+            this.Toxicity = Toxicity.NobleGas;
+            this.RadiationLevel = -1;
+            this.LiquidSurfacePercentage = 0.0;
+            this.AxialTilt = 0.0;
         }
 
         #endregion
@@ -150,9 +159,8 @@ namespace SolarSystemLibrary.Models {
         ///
         /// <seealso cref="IPlanetaryBody.Habitable"/>
         ///=================================================================================================
-        public bool Habitable
-        {
-            get { return this.IsHabitable(); }
+        public bool Habitable {
+            get { return this.IsHabitable( ); }
         }
 
         ///=================================================================================================
@@ -185,35 +193,34 @@ namespace SolarSystemLibrary.Models {
 
         #endregion
 
-        protected bool IsHabitable()
-        {
+        #region Members
+
+        protected bool IsHabitable( ) {
             var status = this.Size != PlanetSize.AsteroidBelt;
 
-            if ((int)this.Temperature < -1 ||
-                 (int)this.Temperature > 1)
-            {
+            if ( (int) this.Temperature < -1 ||
+                 (int) this.Temperature > 1 ) {
                 status = false;
             }
 
-            if ((int)this.Pressure < -1 ||
-                 (int)this.Pressure > 1)
-            {
+            if ( (int) this.Pressure < -1 ||
+                 (int) this.Pressure > 1 ) {
                 status = false;
             }
 
-            if ((int)this.Toxicity < -1 ||
-                 (int)this.Toxicity > 1)
-            {
+            if ( (int) this.Toxicity < -1 ||
+                 (int) this.Toxicity > 1 ) {
                 status = false;
             }
 
-            if (this.RadiationLevel != 0)
-            {
+            if ( this.RadiationLevel != 0 ) {
                 status = false;
             }
 
             return status;
         }
+
+        #endregion
 
         #region Overrides of Object
 
@@ -232,7 +239,14 @@ namespace SolarSystemLibrary.Models {
         /// </returns>
         ///=================================================================================================
         public override string ToString( ) {
-            string result = this.LunarBodies.Aggregate( "", ( current, body ) => current + ( ( this.Size == PlanetSize.SubJovian || this.Size == PlanetSize.Jovian || this.Size == PlanetSize.SuperJovian ) && body.Size == PlanetSize.Asteroid ? string.Empty : body.ToString( ) ) );
+            string result = this.LunarBodies.Aggregate(
+                "",
+                ( current, body ) =>
+                current +
+                ( ( this.Size == PlanetSize.SubJovian || this.Size == PlanetSize.Jovian ||
+                    this.Size == PlanetSize.SuperJovian ) && body.Size == PlanetSize.Asteroid
+                      ? string.Empty
+                      : body.ToString( ) ) );
             return
                 string.Format(
                     "Planetary Body Kind: {0}\r\n\t" +
