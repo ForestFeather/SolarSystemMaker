@@ -68,6 +68,9 @@
     <Compile Include="ViewModels\PlanetViewModel.cs" />
     <Compile Include="ViewModels\SolarSystemViewModel.cs" />
     <Compile Include="ViewModels\StarViewModel.cs" />
+    <Compile Include="Views\LunarBodyView.xaml.cs">
+      <DependentUpon>LunarBodyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
     <Compile Include="Views\StarView.xaml.cs">
       <DependentUpon>StarView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\LunarBodyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

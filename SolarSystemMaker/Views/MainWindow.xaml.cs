@@ -82,6 +82,9 @@ namespace SolarSystemMaker.Views {
         /// <param name="e">        Event information to send to registered event handlers. </param>
         ///=================================================================================================
         private void OnClickGenerate( object sender, RoutedEventArgs e ) {
+            // Clear out old viewmodels
+            MainViewModel.ViewModels.Clear();
+
             this._system = this._generator.GenerateSolarSystem( );
             foreach ( var star in _system.Stars ) {
                 MainViewModel.ViewModels.Add(new StarViewModel{DomainObject =  star});

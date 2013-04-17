@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="SolarSystemMaker.Views.LunarBodyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ViewModels="clr-namespace:SolarSystemMaker.ViewModels"
+             xmlns:SolarSystemLibrary="clr-namespace:SolarSystemLibrary;assembly=SolarSystemLibrary"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800" 
+             d:DataContext="{d:DesignInstance Type=ViewModels:LunarBodyViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style x:Key="Spacing" TargetType="{x:Type Control}">
+                <Setter Property="Control.Margin" Value="5,5,5,5" />
+            </Style>
+            <ObjectDataProvider x:Key="PlanetSize" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:TypeExtension Type="SolarSystemLibrary:PlanetSize" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="AtmosphericPressure" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:TypeExtension Type="SolarSystemLibrary:AtmosphericPressure" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="Temperature" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:TypeExtension Type="SolarSystemLibrary:Temperature" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="Toxicity" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:TypeExtension Type="SolarSystemLibrary:Toxicity" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </Grid.Resources>
+        <DockPanel Grid.Row="0" Grid.Column="0" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Planet Size: " />
+            <ComboBox x:Name="PlanetSize" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource PlanetSize}}" SelectedItem="{Binding Path=Size}" />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Diameter: " />
+            <xctk:DoubleUpDown x:Name="Diameter" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=Diameter}" Increment=".05" Minimum="0.01" />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Gravity: " />
+            <xctk:DoubleUpDown x:Name="Gravity" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=Gravity}" Increment=".05" Minimum="0.01" Maximum="8.00"/>
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="0" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Planet Order: " />
+            <xctk:DoubleUpDown x:Name="PlanetOrder" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=PlanetOrder}" Increment=".05" Minimum="0.01" />
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="1" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Atmospheric Pressure: " />
+            <ComboBox x:Name="AtmosphericPressure" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource AtmosphericPressure}}" SelectedItem="{Binding Path=Pressure}" />
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="2" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Toxicity: " />
+            <ComboBox x:Name="Toxicity" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Toxicity}}" SelectedItem="{Binding Path=Toxicity}" />
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.Column="0" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Temperature: " />
+            <ComboBox x:Name="Temperature" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Temperature}}" SelectedItem="{Binding Path=Temperature}" />
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.Column="1" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Radiation Level: " />
+            <xctk:DoubleUpDown x:Name="RadiationLevel" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=RadiationLevel}" Increment=".05" Minimum="0.01" />
+        </DockPanel>
+        <DockPanel Grid.Row="4" Grid.Column="1" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Liquid Surface Percentage: " />
+            <xctk:DoubleUpDown x:Name="LiquidSurfacePercentage" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=LiquidSurfacePercentage}" Increment=".05" Minimum="0.01" Maximum="100.00"/>
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.Column="2" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Axial Tilt: " />
+            <xctk:DoubleUpDown x:Name="AxialTilt" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=AxialTilt}" Increment=".05" Minimum="0.00" Maximum="45.00"/>
+        </DockPanel>
+        <DockPanel Grid.Row="4" Grid.Column="0" >
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Habitable? " />
+            <CheckBox x:Name="Habitable" Style="{StaticResource Spacing}" IsEnabled="False" IsChecked="{Binding Path=Habitable, Mode=OneWay}" />
+        </DockPanel>
+    </Grid>
+</UserControl>
