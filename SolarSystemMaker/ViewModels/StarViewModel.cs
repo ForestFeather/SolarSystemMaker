@@ -1,25 +1,32 @@
 ﻿// ==========================================================================================================
-// 
-//  File ID: SolarSystemMaker - SolarSystemMaker - StarViewModel.cs 
-// 
-//  Copyright 2011-2012
-//  WR Medical Electronics Company
-// 
-//  Last Changed By: cdo - Collin D. O'Connor
-//  Last Changed Date: 10:44 AM, 01/04/2013
-// 
-//  Notes:
 //  
+//   File ID: SolarSystemMaker - SolarSystemMaker - StarViewModel.cs 
+//  
+//   Copyright 2011-2013
+//   WR Medical Electronics Company
+//  
+//   Last Changed By: cdo - Collin D. O'Connor
+//   Last Changed Date: 3:28 PM, 29/01/2015
+//   Created Date: 1:11 PM, 19/04/2013
+//  
+//   Notes:
+//   
 // ==========================================================================================================
 
 #region Imported Namespaces
 
-using SolarSystemLibrary;
-using SolarSystemLibrary.Models;
+
 
 #endregion
 
 namespace SolarSystemMaker.ViewModels {
+    #region Imported Namespaces
+
+    using SolarSystemLibrary;
+    using SolarSystemLibrary.Models;
+
+    #endregion
+
     ///=================================================================================================
     /// <summary>   Star view model. </summary>
     ///
@@ -30,9 +37,22 @@ namespace SolarSystemMaker.ViewModels {
     /// <seealso cref="SolarSystemLibrary.Models.IStar"/>
     ///=================================================================================================
     public class StarViewModel : BaseViewModel, IBaseViewModel<IStar>, IStar {
-
+        ///=================================================================================================
+        /// <summary>   Default constructor. </summary>
+        ///
+        /// <remarks>   Cdo, 1/29/2015. </remarks>
+        ///=================================================================================================
         public StarViewModel( ) {
-            DisplayName = "Star";
+            this.DisplayName = "S:";
+            this.PropertyChanged += ( sender, args ) =>
+            {
+                switch ( args.PropertyName ) {
+                    case "Category":
+                    case "MainSequenceStar":
+                        this.DisplayName = string.Join( "S:{0}{1}", this.Category, this.MainSequenceStar ? "*" : "" );
+                        break;
+                }
+            };
         }
 
         #region Implementation of IBaseViewModel<IStar>
@@ -51,9 +71,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the category. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IStar.Category"/>
+        /// <value> The category. </value>
         ///
-        /// ### <value> The category. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IStar.Category"/>
         ///=================================================================================================
         public StarCategory Category {
             get { return this.DomainObject.Category; }
@@ -66,9 +86,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets a value indicating whether the main sequence star. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IStar.MainSequenceStar"/>
+        /// <value> true if main sequence star, false if not. </value>
         ///
-        /// ### <value> true if main sequence star, false if not. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IStar.MainSequenceStar"/>
         ///=================================================================================================
         public bool MainSequenceStar {
             get { return this.DomainObject.MainSequenceStar; }
@@ -81,9 +101,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the solar mass. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IStar.SolarMass"/>
+        /// <value> The solar mass. </value>
         ///
-        /// ### <value> The solar mass. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IStar.SolarMass"/>
         ///=================================================================================================
         public double SolarMass {
             get { return this.DomainObject.SolarMass; }

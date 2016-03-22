@@ -1,26 +1,32 @@
 ﻿// ==========================================================================================================
-// 
-//  File ID: SolarSystemMaker - SolarSystemMaker - PlanetViewModel.cs 
-// 
-//  Copyright 2011-2012
-//  WR Medical Electronics Company
-// 
-//  Last Changed By: cdo - Collin D. O'Connor
-//  Last Changed Date: 11:12 AM, 01/04/2013
-// 
-//  Notes:
 //  
+//   File ID: SolarSystemMaker - SolarSystemMaker - PlanetViewModel.cs 
+//  
+//   Copyright 2011-2013
+//   WR Medical Electronics Company
+//  
+//   Last Changed By: cdo - Collin D. O'Connor
+//   Last Changed Date: 3:31 PM, 29/01/2015
+//   Created Date: 1:11 PM, 19/04/2013
+//  
+//   Notes:
+//   
 // ==========================================================================================================
 
 #region Imported Namespaces
 
-using System.Collections.Generic;
-using SolarSystemLibrary;
-using SolarSystemLibrary.Models;
+
 
 #endregion
 
 namespace SolarSystemMaker.ViewModels {
+    #region Imported Namespaces
+
+    using System.Collections.Generic;
+    using SolarSystemLibrary;
+    using SolarSystemLibrary.Models;
+
+    #endregion
 
     ///=================================================================================================
     /// <summary>   Planet view model. </summary>
@@ -32,9 +38,22 @@ namespace SolarSystemMaker.ViewModels {
     /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody"/>
     ///=================================================================================================
     public class PlanetViewModel : BaseViewModel, IBaseViewModel<IPlanetaryBody>, IPlanetaryBody {
-
+        ///=================================================================================================
+        /// <summary>   Default constructor. </summary>
+        ///
+        /// <remarks>   Cdo, 1/29/2015. </remarks>
+        ///=================================================================================================
         public PlanetViewModel( ) {
-            DisplayName = "Planet";
+            this.DisplayName = "P:";
+            this.PropertyChanged += ( sender, args ) =>
+            {
+                switch ( args.PropertyName ) {
+                    case "Size":
+                    case "Habitable":
+                        this.DisplayName = string.Join( "P:{0}{1}", this.Size, this.Habitable ? "^" : "" );
+                        break;
+                }
+            };
         }
 
         #region Implementation of IBaseViewModel<IPlanetaryBody>
@@ -53,9 +72,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the size. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Size"/>
+        /// <value> The size. </value>
         ///
-        /// ### <value> The size. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Size"/>
         ///=================================================================================================
         public PlanetSize Size {
             get { return this.DomainObject.Size; }
@@ -68,9 +87,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the diameter. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Diameter"/>
+        /// <value> The diameter. </value>
         ///
-        /// ### <value> The diameter. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Diameter"/>
         ///=================================================================================================
         public double Diameter {
             get { return this.DomainObject.Diameter; }
@@ -83,9 +102,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the gravity. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Gravity"/>
+        /// <value> The gravity. </value>
         ///
-        /// ### <value> The gravity. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Gravity"/>
         ///=================================================================================================
         public double Gravity {
             get { return this.DomainObject.Gravity; }
@@ -98,9 +117,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the lunar bodies. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.LunarBodies"/>
+        /// <value> The lunar bodies. </value>
         ///
-        /// ### <value> The lunar bodies. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.LunarBodies"/>
         ///=================================================================================================
         public IList<IPlanetaryBody> LunarBodies {
             get { return this.DomainObject.LunarBodies; }
@@ -113,9 +132,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the planet order. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.PlanetOrder"/>
+        /// <value> The planet order. </value>
         ///
-        /// ### <value> The planet order. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.PlanetOrder"/>
         ///=================================================================================================
         public int PlanetOrder {
             get { return this.DomainObject.PlanetOrder; }
@@ -128,9 +147,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets the number of moons. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumMoons"/>
+        /// <value> The total number of moons. </value>
         ///
-        /// ### <value> The total number of moons. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumMoons"/>
         ///=================================================================================================
         public int NumMoons {
             get { return this.DomainObject.NumMoons; }
@@ -139,9 +158,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets the number of asteroids. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumAsteroids"/>
+        /// <value> The total number of asteroids. </value>
         ///
-        /// ### <value> The total number of asteroids. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumAsteroids"/>
         ///=================================================================================================
         public int NumAsteroids {
             get { return this.DomainObject.NumAsteroids; }
@@ -150,9 +169,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets the number of rings. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumRings"/>
+        /// <value> The total number of rings. </value>
         ///
-        /// ### <value> The total number of rings. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.NumRings"/>
         ///=================================================================================================
         public int NumRings {
             get { return this.DomainObject.NumRings; }
@@ -161,9 +180,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the pressure. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Pressure"/>
+        /// <value> The pressure. </value>
         ///
-        /// ### <value> The pressure. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Pressure"/>
         ///=================================================================================================
         public AtmosphericPressure Pressure {
             get { return this.DomainObject.Pressure; }
@@ -176,9 +195,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the temperature. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Temperature"/>
+        /// <value> The temperature. </value>
         ///
-        /// ### <value> The temperature. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Temperature"/>
         ///=================================================================================================
         public Temperature Temperature {
             get { return this.DomainObject.Temperature; }
@@ -191,9 +210,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the toxicity. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Toxicity"/>
+        /// <value> The toxicity. </value>
         ///
-        /// ### <value> The toxicity. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Toxicity"/>
         ///=================================================================================================
         public Toxicity Toxicity {
             get { return this.DomainObject.Toxicity; }
@@ -206,9 +225,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the radiation level. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.RadiationLevel"/>
+        /// <value> The radiation level. </value>
         ///
-        /// ### <value> The radiation level. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.RadiationLevel"/>
         ///=================================================================================================
         public int RadiationLevel {
             get { return this.DomainObject.RadiationLevel; }
@@ -221,9 +240,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets a value indicating whether this object is habitable. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Habitable"/>
+        /// <value> true if habitable, false if not. </value>
         ///
-        /// ### <value> true if habitable, false if not. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Habitable"/>
         ///=================================================================================================
         public bool Habitable {
             get { return this.DomainObject.Habitable; }
@@ -232,9 +251,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the occupied. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Occupied"/>
+        /// <value> The occupied. </value>
         ///
-        /// ### <value> The occupied. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.Occupied"/>
         ///=================================================================================================
         public int Occupied {
             get { return this.DomainObject.Occupied; }
@@ -247,9 +266,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the technology level. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.TechnologyLevel"/>
+        /// <value> The technology level. </value>
         ///
-        /// ### <value> The technology level. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.TechnologyLevel"/>
         ///=================================================================================================
         public TechLevel TechnologyLevel {
             get { return this.DomainObject.TechnologyLevel; }
@@ -262,9 +281,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the liquid surface percentage. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.LiquidSurfacePercentage"/>
+        /// <value> The liquid surface percentage. </value>
         ///
-        /// ### <value> The liquid surface percentage. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.LiquidSurfacePercentage"/>
         ///=================================================================================================
         public double LiquidSurfacePercentage {
             get { return this.DomainObject.LiquidSurfacePercentage; }
@@ -277,9 +296,9 @@ namespace SolarSystemMaker.ViewModels {
         ///=================================================================================================
         /// <summary>   Gets or sets the axial tilt. </summary>
         ///
-        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.AxialTilt"/>
+        /// <value> The axial tilt. </value>
         ///
-        /// ### <value> The axial tilt. </value>
+        /// <seealso cref="SolarSystemLibrary.Models.IPlanetaryBody.AxialTilt"/>
         ///=================================================================================================
         public double AxialTilt {
             get { return this.DomainObject.AxialTilt; }
