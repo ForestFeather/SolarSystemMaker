@@ -99,11 +99,11 @@
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="1" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Asteroids: " />
-            <TextBox IsEnabled="False" DockPanel.Dock="Left" Style="{StaticResource Spacing}" Text="{Binding Path=NumMoons, Mode=OneWay}" />
+            <TextBox IsEnabled="False" DockPanel.Dock="Left" Style="{StaticResource Spacing}" Text="{Binding Path=NumAsteroids, Mode=OneWay}" />
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="2" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Rings: " />
-            <TextBox IsEnabled="False" DockPanel.Dock="Left" Style="{StaticResource Spacing}" Text="{Binding Path=NumMoons, Mode=OneWay}" />
+            <TextBox IsEnabled="False" DockPanel.Dock="Left" Style="{StaticResource Spacing}" Text="{Binding Path=NumRings, Mode=OneWay}" />
         </DockPanel>
     </Grid>
 </UserControl>
