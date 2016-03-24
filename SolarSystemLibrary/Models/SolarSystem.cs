@@ -1,16 +1,14 @@
-// ==========================================================================================================
-// 
-//  File ID: SolarSystemMaker - SolarSystemLibrary - SolarSystem.cs 
-// 
-//  Copyright 2011-2012
-//  WR Medical Electronics Company
-// 
-//  Last Changed By: cdo - Collin D. O'Connor
-//  Last Changed Date: 9:48 AM, 01/04/2013
-// 
-//  Notes:
-//  
-// ==========================================================================================================
+// // ==========================================================================================================
+// // 
+// //  File ID: SolarSystemMaker - SolarSystemLibrary - SolarSystem.cs 
+// // 
+// //  Last Changed By: ForestFeather - 
+// //  Last Changed Date: 9:05 PM, 23/03/2016
+// //  Created Date: 5:54 PM, 11/02/2015
+// // 
+// //  Notes:
+// //  
+// // ==========================================================================================================
 
 #region Imported Namespaces
 
@@ -20,134 +18,17 @@ using System.Linq;
 #endregion
 
 namespace SolarSystemLibrary.Models {
-    ///=================================================================================================
+    ///-------------------------------------------------------------------------------------------------
     /// <summary>   Solar system. </summary>
     ///
     /// <remarks>   Cdo, 3/29/2013. </remarks>
     ///
     /// <seealso cref="ISolarSystem"/>
-    ///=================================================================================================
+    ///-------------------------------------------------------------------------------------------------
     public class SolarSystem : ISolarSystem {
-        #region Implementation of ISolarSystem
-
-        #region Constructors
-
-        ///=================================================================================================
-        /// <summary>   Default constructor. </summary>
-        ///
-        /// <remarks>   Cdo, 3/29/2013. </remarks>
-        ///=================================================================================================
-        public SolarSystem( ) {
-            this.Stars = new List<IStar>( );
-            this.Planets = new List<IPlanetaryBody>( );
-        }
-
-        #endregion
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the stars. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.Stars"/>
-        ///
-        /// ### <value> The stars. </value>
-        ///=================================================================================================
-        public IList<IStar> Stars { get; set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the planets. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.Planets"/>
-        ///
-        /// ### <value> The planets. </value>
-        ///=================================================================================================
-        public IList<IPlanetaryBody> Planets { get; set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of stars. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumStars"/>
-        ///
-        /// ### <value> The total number of stars. </value>
-        ///=================================================================================================
-        public int NumStars { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of planets. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumPlanets"/>
-        ///
-        /// ### <value> The total number of planets. </value>
-        ///=================================================================================================
-        public int NumPlanets { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of moons. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumMoons"/>
-        ///
-        /// ### <value> The total number of moons. </value>
-        ///=================================================================================================
-        public int NumMoons { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of habitable planets. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumHabitablePlanets"/>
-        ///
-        /// ### <value> The total number of habitable planets. </value>
-        ///=================================================================================================
-        public int NumHabitablePlanets { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of habitable moons. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumHabitableMoons"/>
-        ///
-        /// ### <value> The total number of habitable moons. </value>
-        ///=================================================================================================
-        public int NumHabitableMoons { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of habitable bodies. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumHabitableBodies"/>
-        ///
-        /// ### <value> The total number of habitable bodies. </value>
-        ///=================================================================================================
-        public int NumHabitableBodies { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of solid planets. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumSolidPlanets"/>
-        ///
-        /// ### <value> The total number of solid planets. </value>
-        ///=================================================================================================
-        public int NumSolidPlanets { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of jovian planets. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumJovianPlanets"/>
-        ///
-        /// ### <value> The total number of jovian planets. </value>
-        ///=================================================================================================
-        public int NumJovianPlanets { get; private set; }
-
-        ///=================================================================================================
-        /// <summary>   Gets or sets the number of asteroid belts. </summary>
-        ///
-        /// <seealso cref="ISolarSystem.NumAsteroidBelts"/>
-        ///
-        /// ### <value> The total number of asteroid belts. </value>
-        ///=================================================================================================
-        public int NumAsteroidBelts { get; private set; }
-
-        #endregion
-
         #region Overrides of Object
 
-        ///=================================================================================================
+        ///-------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Returns a <see cref="T:System.String"/> that represents the current
         ///     <see cref="T:System.Object"/>.
@@ -155,12 +36,10 @@ namespace SolarSystemLibrary.Models {
         ///
         /// <remarks>   Cdo, 3/29/2013. </remarks>
         ///
-        /// <seealso cref="object.ToString()"/>
+        /// <returns>   A string that represents this object. </returns>
         ///
-        /// ### <returns>
-        ///     A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
-        ///=================================================================================================
+        /// <seealso cref="object.ToString()"/>
+        ///-------------------------------------------------------------------------------------------------
         public override string ToString( ) {
             return
                 string.Format(
@@ -169,6 +48,146 @@ namespace SolarSystemLibrary.Models {
                     this.Planets.Count,
                     this.Stars.Aggregate( "", ( current, star ) => current + star.ToString( ) ),
                     this.Planets.Aggregate( "", ( current, planet ) => current + planet.ToString( ) ) );
+        }
+
+        #endregion
+
+        #region Implementation of ISolarSystem
+
+        #region Constructors
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Default constructor. </summary>
+        ///
+        /// <remarks>   Cdo, 3/29/2013. </remarks>
+        ///-------------------------------------------------------------------------------------------------
+        public SolarSystem( ) {
+            this.Stars = new List<IStar>( );
+            this.Planets = new List<IPlanetaryBody>( );
+        }
+
+        #endregion
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets or sets the stars. </summary>
+        ///
+        /// <value> The stars. </value>
+        ///
+        /// <seealso cref="ISolarSystem.Stars"/>
+        ///-------------------------------------------------------------------------------------------------
+        public IList<IStar> Stars { get; set; }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets or sets the planets. </summary>
+        ///
+        /// <value> The planets. </value>
+        ///
+        /// <seealso cref="ISolarSystem.Planets"/>
+        ///-------------------------------------------------------------------------------------------------
+        public IList<IPlanetaryBody> Planets { get; set; }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of stars. </summary>
+        ///
+        /// <value> The total number of stars. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumStars"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumStars {
+            get { return this.Stars != null ? this.Stars.Count : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of planets. </summary>
+        ///
+        /// <value> The total number of planets. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumPlanets"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumPlanets {
+            get { return this.Planets != null ? this.Planets.Count : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of moons. </summary>
+        ///
+        /// <value> The total number of moons. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumMoons"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumMoons {
+            get { return this.Planets != null ? this.Planets.Sum( p => p.NumMoons ) : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of habitable planets. </summary>
+        ///
+        /// <value> The total number of habitable planets. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumHabitablePlanets"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumHabitablePlanets {
+            get { return this.Planets != null ? this.Planets.Count( s => s.Habitable ) : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of habitable moons. </summary>
+        ///
+        /// <value> The total number of habitable moons. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumHabitableMoons"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumHabitableMoons {
+            get { return this.Planets != null ? this.Planets.Sum( s => s.LunarBodies.Count( l => l.Habitable ) ) : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of habitable bodies. </summary>
+        ///
+        /// <value> The total number of habitable bodies. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumHabitableBodies"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumHabitableBodies {
+            get { return this.Planets != null ? this.NumHabitablePlanets + this.NumHabitableMoons : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of solid planets. </summary>
+        ///
+        /// <value> The total number of solid planets. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumSolidPlanets"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumSolidPlanets {
+            get {
+                return this.Planets != null
+                           ? this.Planets.Count(
+                               p => p.Size > PlanetSize.AsteroidBelt && p.Size < PlanetSize.SubJovian )
+                           : -1;
+            }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of jovian planets. </summary>
+        ///
+        /// <value> The total number of jovian planets. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumJovianPlanets"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumJovianPlanets {
+            get { return this.Planets != null ? this.Planets.Count( p => p.Size >= PlanetSize.SubJovian ) : -1; }
+        }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the number of asteroid belts. </summary>
+        ///
+        /// <value> The total number of asteroid belts. </value>
+        ///
+        /// <seealso cref="ISolarSystem.NumAsteroidBelts"/>
+        ///-------------------------------------------------------------------------------------------------
+        public int NumAsteroidBelts {
+            get { return this.Planets != null ? this.Planets.Count( p => p.Size == PlanetSize.AsteroidBelt ) : -1; }
         }
 
         #endregion

@@ -16,6 +16,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using SolarSystemLibrary.Models;
 
 #endregion
@@ -156,7 +158,7 @@ namespace SolarSystemLibrary.Generators {
                         havePlanets = true;
                     }
                 }
-            } while ( !havePlanets && needPlanets && count++ < 100 );
+            } while ( !havePlanets && needPlanets );
 
             if ( !havePlanets ) {
                 return system;
@@ -185,7 +187,7 @@ namespace SolarSystemLibrary.Generators {
                         currentTemplevel--;
                     }
                 }
-            } while (habitablePlanets < minHabitablePlanets && count++ < 100);
+            } while (habitablePlanets < minHabitablePlanets);
 
             // All done, return
             return system;

@@ -44,7 +44,7 @@
             <CheckBox Grid.Row="0" Grid.Column="2" x:Name="HabitableStar" Style="{StaticResource Spacing}" Content="Habitable Star?" />
             <DockPanel Grid.Row="0" Grid.Column="3" >
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Star Color" />
-                <ComboBox x:Name="StarColor" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource StarCategories}}" />
+                <ComboBox x:Name="StarColor" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource StarCategories}}" IsEnabled="False" />
             </DockPanel>
             <DockPanel Grid.Row="1" Grid.Column="0" >
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Planets" />
@@ -78,6 +78,8 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Click="OnClickGenerate" Margin="5">Generate</Button>
             <Button Click="OnCopyToClipboard" Margin="5">Copy To Cliboard</Button>
+            <TextBlock Text="Number Systems Generated So Far: " />
+            <TextBlock x:Name="NumSystemsGenerated" />
         </StackPanel>
         
     </Grid>
