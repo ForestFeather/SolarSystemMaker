@@ -41,6 +41,8 @@ namespace SolarSystemMaker.Views {
         /// <summary>   The system. </summary>
         private ISolarSystem _system;
 
+        private bool _generatingSystem = false;
+
         #region Constructors
 
         ///-------------------------------------------------------------------------------------------------
@@ -48,25 +50,25 @@ namespace SolarSystemMaker.Views {
         ///
         /// <remarks>   Cdo, 3/29/2013. </remarks>
         ///-------------------------------------------------------------------------------------------------
-        public MainWindow( ) {
-            this.InitializeComponent( );
+        public MainWindow() {
+            this.InitializeComponent();
 
-            var simpleSolarGenerator = new SimpleSolarGenerator( );
-            var simplePlanetGenerator = new SimplePlanetGenerator( );
-            var simpleLunarGenerator = new SimpleLunarGenerator( );
+            var simpleSolarGenerator = new SimpleSolarGenerator();
+            var simplePlanetGenerator = new SimplePlanetGenerator();
+            var simpleLunarGenerator = new SimpleLunarGenerator();
             this._generator = new SimpleSolarSystemGenerator(
                 simpleSolarGenerator,
                 simplePlanetGenerator,
-                simpleLunarGenerator );
+                simpleLunarGenerator);
 
             // Init them all
-            simpleLunarGenerator.Initialize( );
-            simplePlanetGenerator.Initialize( );
-            simpleSolarGenerator.Initialize( );
-            this._generator.Initialize( );
+            simpleLunarGenerator.Initialize();
+            simplePlanetGenerator.Initialize();
+            simpleSolarGenerator.Initialize();
+            this._generator.Initialize();
 
             // set the main viewmodel
-            this.MainViewModel = new MainViewModel( );
+            this.MainViewModel = new MainViewModel();
             this.DataContext = this.MainViewModel;
             this.NumSystemsGenerated.Text = "0";
         }
@@ -82,6 +84,14 @@ namespace SolarSystemMaker.Views {
 
         #region Members
 
+        private async void OnClear(object sender, RoutedEventArgs e)
+        {
+            this.NumSystemsGenerated.Text = "0";
+
+            // Clear out old viewmodels
+            this.MainViewModel.ViewModels.Clear();
+        }
+
         ///-------------------------------------------------------------------------------------------------
         /// <summary>   Raises the routed event. </summary>
         ///
@@ -90,63 +100,89 @@ namespace SolarSystemMaker.Views {
         /// <param name="sender">   Source of the event. </param>
         /// <param name="e">        Event information to send to registered event handlers. </param>
         ///-------------------------------------------------------------------------------------------------
-        private async void OnClickGenerate( object sender, RoutedEventArgs e ) {
+        private async void OnClickGenerate(object sender, RoutedEventArgs e) {
+            if(_generatingSystem) { MessageBox.Show("Already generating system!"); } else { _generatingSystem = true; }
+            
             // Check current variables 
             this.NumSystemsGenerated.Text = "0";
-            int numStars = string.IsNullOrEmpty( this.NumberOfStars.Text ) ||
-                           !Int32.TryParse( this.NumberOfStars.Text, out numStars ) || numStars <= 0
-                               ? -1
-                               : numStars;
+
+            // Clear out old viewmodels
+            this.MainViewModel.ViewModels.Clear();
+
+            var systemCount = await this.TryFindStarSystem(new Progress<int>(numSystemsGenerated => NumSystemsGenerated.Text = numSystemsGenerated.ToString()));
+
+            if (systemCount > 0)
+            {
+                foreach (var star in this._system.Stars)
+                {
+                    this.MainViewModel.ViewModels.Add(new StarViewModel { DomainObject = star });
+                }
+
+                foreach (var planet in this._system.Planets)
+                {
+                    this.MainViewModel.ViewModels.Add(new PlanetViewModel { DomainObject = planet });
+                    foreach (var lunarBody in planet.LunarBodies)
+                    {
+                        this.MainViewModel.ViewModels.Add(new LunarBodyViewModel { DomainObject = lunarBody });
+                    }
+                }
+            }
+        }
+
+        private async Task<int> TryFindStarSystem(IProgress<int> progress) {
+            int numStars = string.IsNullOrEmpty(this.NumberOfStars.Text) ||
+               !Int32.TryParse(this.NumberOfStars.Text, out numStars) || numStars <= 0
+                   ? -1
+                   : numStars;
             bool mainSequence = this.MainSequenceStar.IsChecked == true;
             bool habitableStar = this.HabitableStar.IsChecked == true;
             //StarColor starColor = 
-            int numPlanets = string.IsNullOrEmpty( this.NumberOfStars.Text ) ||
-                             !Int32.TryParse( this.NumberOfStars.Text, out numPlanets ) || numPlanets <= 0
+            int numPlanets = string.IsNullOrEmpty(this.NumberOfStars.Text) ||
+                             !Int32.TryParse(this.NumberOfStars.Text, out numPlanets) || numPlanets <= 0
                                  ? -1
                                  : numPlanets;
-            int numHabitablePlanets = string.IsNullOrEmpty( this.NumberOfStars.Text ) ||
-                                      !Int32.TryParse( this.NumberOfStars.Text, out numHabitablePlanets ) ||
+            int numHabitablePlanets = string.IsNullOrEmpty(this.NumHabitablePlanets.Text) ||
+                                      !Int32.TryParse(this.NumHabitablePlanets.Text, out numHabitablePlanets) ||
                                       numHabitablePlanets <= 0
                                           ? -1
                                           : numHabitablePlanets;
-            int numGoldilocksPlanets = string.IsNullOrEmpty( this.NumberOfStars.Text ) ||
-                                       !Int32.TryParse( this.NumberOfStars.Text, out numGoldilocksPlanets ) ||
+            int numGoldilocksPlanets = string.IsNullOrEmpty(this.NumGoldilocksPlanets.Text) ||
+                                       !Int32.TryParse(this.NumGoldilocksPlanets.Text, out numGoldilocksPlanets) ||
                                        numGoldilocksPlanets <= 0
                                            ? -1
                                            : numGoldilocksPlanets;
 
-            // Clear out old viewmodels
-            this.MainViewModel.ViewModels.Clear( );
-
             bool valid;
             var systemCount = 0;
+            var counter = 0;
+            var maxGenNum = 10000;
             do {
                 valid = true;
                 this._system =
-                    await this.GenerateSolarSystem( numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets );
-                if( mainSequence && !this._system.Stars.Any( s => s.MainSequenceStar ) ) {
-                    valid = false;
-                }
-                if( habitableStar && this._system.NumHabitableBodies == 0 ) {
-                    valid = false;
-                }
-
-                if( numHabitablePlanets > _system.NumHabitableBodies ) {
+                    await this.GenerateSolarSystem(numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets);
+                if (mainSequence && !this._system.Stars.Any(s => s.MainSequenceStar)) {
+            valid = false;
+        }
+                if (habitableStar && this._system.NumHabitableBodies == 0) {
                     valid = false;
                 }
 
-                this.NumSystemsGenerated.Text = ( ++systemCount ).ToString( );
-            } while( !valid );
-            foreach( var star in this._system.Stars ) {
-                this.MainViewModel.ViewModels.Add( new StarViewModel { DomainObject = star } );
+                if (numHabitablePlanets > _system.NumHabitableBodies) {
+                    valid = false;
+                }
+
+                progress.Report(++systemCount);                
+            } while (!valid && counter++ <= maxGenNum);
+
+            if (counter >= maxGenNum)
+            {
+                MessageBox.Show(string.Format("Generated over {0} star systems without meeting requirements.  Aborting.", maxGenNum));
+                systemCount = 0;
             }
 
-            foreach( var planet in this._system.Planets ) {
-                this.MainViewModel.ViewModels.Add( new PlanetViewModel { DomainObject = planet } );
-                foreach( var lunarBody in planet.LunarBodies ) {
-                    this.MainViewModel.ViewModels.Add( new LunarBodyViewModel { DomainObject = lunarBody } );
-                }
-            }
+            _generatingSystem = false;
+
+            return systemCount;
         }
 
         ///-------------------------------------------------------------------------------------------------

@@ -76,10 +76,11 @@
             </ContentControl>
         </DockPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Click="OnClickGenerate" Margin="5">Generate</Button>
-            <Button Click="OnCopyToClipboard" Margin="5">Copy To Cliboard</Button>
-            <TextBlock Text="Number Systems Generated So Far: " />
-            <TextBlock x:Name="NumSystemsGenerated" />
+            <Button Click="OnClickGenerate" Margin="5" Padding="5 0">Generate</Button>
+            <Button Click="OnCopyToClipboard" Margin="5" Padding="5 0">Copy To Cliboard</Button>
+            <Button Click="OnClear" Margin="5" Padding="5 0">Clear</Button>
+            <TextBlock VerticalAlignment="Center" Padding="5 0" Text="Number Systems Generated So Far: " />
+            <TextBlock VerticalAlignment="Center" x:Name="NumSystemsGenerated" />
         </StackPanel>
         
     </Grid>
