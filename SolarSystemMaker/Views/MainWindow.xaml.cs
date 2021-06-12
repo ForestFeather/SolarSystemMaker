@@ -155,21 +155,24 @@ namespace SolarSystemMaker.Views {
             bool valid;
             var systemCount = 0;
             var counter = 0;
-            var maxGenNum = 10000;
+            var maxGenNum = 10000000;
             do {
                 valid = true;
                 this._system =
                     await this.GenerateSolarSystem(numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets);
-                if (mainSequence && !this._system.Stars.Any(s => s.MainSequenceStar)) {
-            valid = false;
-        }
-                if (habitableStar && this._system.NumHabitableBodies == 0) {
-                    valid = false;
-                }
+                 
+                if (_system != null) { 
+                    if (mainSequence && !this._system.Stars.Any(s => s.MainSequenceStar)) {
+                        valid = false;
+                    }
+                    if (habitableStar && this._system.NumHabitableBodies == 0) {
+                        valid = false;
+                    }
 
-                if (numHabitablePlanets > _system.NumHabitableBodies) {
-                    valid = false;
-                }
+                    if (numHabitablePlanets > _system.NumHabitableBodies) {
+                        valid = false;
+                    }
+                } else { valid = false; }
 
                 progress.Report(++systemCount);                
             } while (!valid && counter++ <= maxGenNum);
@@ -205,7 +208,8 @@ namespace SolarSystemMaker.Views {
                 numStars: numStars,
                 numPlanets: numPlanets,
                 numHabitablePlanets: numHabitablePlanets,
-                numGoldilocksZonePlanets: numGoldilocksPlanets ));
+                numGoldilocksZonePlanets: numGoldilocksPlanets,
+                maxNumToGenerate: 1));
         }
 
         ///-------------------------------------------------------------------------------------------------

@@ -85,6 +85,7 @@ namespace SolarSystemLibrary {
                                           int firstHabitablePlanet = -1,
                                           int numHabitablePlanets = -1,
                                           int numGoldilocksZonePlanets = -1,
+                                          int maxNumToGenerate = -1,
                                           ISolarGenerator solarGenerator = null,
                                           IPlanetaryGenerator planetaryGenerator = null,
                                           ILunarGenerator lunarGenerator = null );

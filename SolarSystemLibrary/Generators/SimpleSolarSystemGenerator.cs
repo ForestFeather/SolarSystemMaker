@@ -126,6 +126,7 @@ namespace SolarSystemLibrary.Generators {
                                                  int firstHabitablePlanet = -1,
                                                  int numHabitablePlanets = -1,
                                                  int numGoldilocksZonePlanets = -1,
+                                                 int maxNumToGenerate = -1,
                                                  ISolarGenerator solarGenerator = null,
                                                  IPlanetaryGenerator planetaryGenerator = null,
                                                  ILunarGenerator lunarGenerator = null ) {
@@ -158,7 +159,11 @@ namespace SolarSystemLibrary.Generators {
                         havePlanets = true;
                     }
                 }
-            } while ( !havePlanets && needPlanets );
+            } while ( !(maxNumToGenerate > 0 && ++count > maxNumToGenerate ) && !havePlanets && needPlanets );
+
+            if (count > maxNumToGenerate) {
+                return null;
+            }
 
             if ( !havePlanets ) {
                 return system;
@@ -187,7 +192,11 @@ namespace SolarSystemLibrary.Generators {
                         currentTemplevel--;
                     }
                 }
-            } while (habitablePlanets < minHabitablePlanets);
+            } while ( !(maxNumToGenerate > 0 && ++count > maxNumToGenerate) && habitablePlanets < minHabitablePlanets );
+
+            if (count > maxNumToGenerate) {
+                return null;
+            }
 
             // All done, return
             return system;
