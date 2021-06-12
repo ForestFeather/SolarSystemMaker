@@ -13,6 +13,7 @@
 #region Imported Namespaces
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -86,7 +87,7 @@ namespace SolarSystemMaker.Views {
 
         #region Members
 
-        private async void OnClear(object sender, RoutedEventArgs e)
+        private void OnClear(object sender, RoutedEventArgs e)
         {
             this.NumSystemsGenerated.Text = "0";
 
@@ -155,30 +156,50 @@ namespace SolarSystemMaker.Views {
                                            ? -1
                                            : numGoldilocksPlanets;
 
-            bool valid;
+            bool found = false;
             var systemCount = 0;
             var counter = 0;
-            var maxGenNum = 10000000;
+            var maxGenNum = 100000;
             do {
-                valid = true;
-                this._system =
-                    await this.GenerateSolarSystem(numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets);
-                 
-                if (_system != null) { 
-                    if (mainSequence && !this._system.Stars.Any(s => s.MainSequenceStar)) {
-                        valid = false;
-                    }
-                    if (habitableStar && this._system.NumHabitableBodies == 0) {
-                        valid = false;
-                    }
+                List<Task<ISolarSystem>> tasks = Enumerable.Range(0, 10).Select(async t => await GenerateSolarSystem(numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets)).ToList();
+                await Task.WhenAll(tasks).ContinueWith(t =>
+                {
+                    foreach (var task in t.Result)
+                    {
+                        var valid = true;
+                        systemCount++;
 
-                    if (numHabitablePlanets > _system.NumHabitableBodies) {
-                        valid = false;
-                    }
-                } else { valid = false; }
+                        if (task != null)
+                        {
+                            if (mainSequence && !task.Stars.Any(s => s.MainSequenceStar))
+                            {
+                                valid = false;
+                            }
+                            if (habitableStar && task.NumHabitableBodies == 0)
+                            {
+                                valid = false;
+                            }
 
-                if(++systemCount % 100 == 0) progress.Report(systemCount);                
-            } while (!valid && counter++ <= maxGenNum && !_cancel);
+                            if (numHabitablePlanets > task.NumHabitableBodies)
+                            {
+                                valid = false;
+                            }
+                        }
+                        else { valid = false; }
+
+                        if (valid)
+                        {
+                            _system = task;
+                            found = true;
+                            break;
+                        }
+                    }
+                });
+
+                
+
+                progress.Report(systemCount);
+            } while (!found && systemCount <= maxGenNum && !_cancel);
 
             progress.Report(systemCount);
             if (counter >= maxGenNum)

@@ -15,6 +15,7 @@
 #region Imported Namespaces
 
 using System;
+using System.Threading;
 
 #endregion
 
@@ -26,7 +27,7 @@ namespace SolarSystemLibrary {
     ///=================================================================================================
     public class DiceRoller {
         /// <summary>   The random. </summary>
-        private readonly Random _random;
+        private readonly ThreadLocal<Random> _random;
 
         #region Constructors
 
@@ -36,7 +37,7 @@ namespace SolarSystemLibrary {
         /// <remarks>   Cdo, 3/20/2013. </remarks>
         ///=================================================================================================
         public DiceRoller( ) {
-            this._random = new Random( );
+            this._random = new ThreadLocal<Random>(() => new Random(Guid.NewGuid().GetHashCode()));
         }
 
         ///=================================================================================================
@@ -47,7 +48,7 @@ namespace SolarSystemLibrary {
         /// <param name="seed"> The seed. </param>
         ///=================================================================================================
         public DiceRoller( int seed ) {
-            this._random = new Random( seed );
+            this._random = new ThreadLocal<Random>(() => new Random(seed));
         }
 
         #endregion
@@ -69,7 +70,7 @@ namespace SolarSystemLibrary {
             var total = 0;
 
             for ( var i = 0; i < numDie; i++ ) {
-                total += ( this._random.Next( numSides ) + 1 ) + modifier;
+                total += ( this._random.Value.Next( numSides ) + 1 ) + modifier;
             }
 
             return total;
@@ -117,7 +118,7 @@ namespace SolarSystemLibrary {
             var result = new int[numDie];
 
             for ( var i = 0; i < numDie; i++ ) {
-                result[ i ] = ( this._random.Next( numSides ) + 1 ) + modifier;
+                result[ i ] = ( this._random.Value.Next( numSides ) + 1 ) + modifier;
             }
 
             return result;
