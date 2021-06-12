@@ -175,8 +175,9 @@ namespace SolarSystemMaker.Views {
             var systemCount = 0;
             var counter = 0;
             var maxGenNum = 100000;
+            var numSimultaneousThreads = 1;
             do {
-                List<Task<ISolarSystem>> tasks = Enumerable.Range(0, 10).Select(async t => await GenerateSolarSystem(numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets)).ToList();
+                List<Task<ISolarSystem>> tasks = Enumerable.Range(0, numSimultaneousThreads).Select(async t => await GenerateSolarSystem(numStars, numPlanets, numHabitablePlanets, numGoldilocksPlanets)).ToList();
                 await Task.WhenAll(tasks).ContinueWith(t =>
                 {
                     foreach (var task in t.Result)

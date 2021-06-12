@@ -372,25 +372,25 @@ namespace SolarSystemLibrary.Generators {
                     planet.Diameter = 2000 + this.Dice.d1000( ) + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.SuperLunar:
-                    planet.Diameter = 3000 + ( this.Dice.Roll( 2000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 3000 +  this.Dice.Roll( 2000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.SubTerran:
-                    planet.Diameter = 5000 + ( this.Dice.Roll( 3000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 5000 +  this.Dice.Roll( 3000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.Terran:
-                    planet.Diameter = 8000 + ( this.Dice.Roll( 3000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 8000 +  this.Dice.Roll( 3000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.SuperTerran:
-                    planet.Diameter = 11000 + ( this.Dice.Roll( 9000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 11000 +  this.Dice.Roll( 9000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.SubJovian:
-                    planet.Diameter = 20000 + ( this.Dice.Roll( 30000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 20000 +  this.Dice.Roll( 30000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.Jovian:
-                    planet.Diameter = 50000 + ( this.Dice.Roll( 50000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 50000 +  this.Dice.Roll( 50000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
                 case PlanetSize.SuperJovian:
-                    planet.Diameter = 100000 + ( this.Dice.Roll( 100000 ) ) + ( this.Dice.d100( ) / 100.0 );
+                    planet.Diameter = 100000 +  this.Dice.Roll( 100000 )  + ( this.Dice.d100( ) / 100.0 );
                     break;
             }
         }
@@ -423,16 +423,16 @@ namespace SolarSystemLibrary.Generators {
                     planet.Gravity = ( this.Dice.Roll( 1, 101, 99 ) ) / 100.0;
                     break;
                 case PlanetSize.SuperTerran:
-                    planet.Diameter = ( this.Dice.Roll( 1, 101, 199 ) ) / 100.0;
+                    planet.Gravity = ( this.Dice.Roll( 1, 101, 199 ) ) / 100.0;
                     break;
                 case PlanetSize.SubJovian:
-                    planet.Diameter = ( this.Dice.Roll( 1, 101, 99 ) ) / 100.0;
+                    planet.Gravity = ( this.Dice.Roll( 1, 101, 99 ) ) / 100.0;
                     break;
                 case PlanetSize.Jovian:
-                    planet.Diameter = ( this.Dice.Roll( 1, 101, 199 ) ) / 100.0;
+                    planet.Gravity = ( this.Dice.Roll( 1, 101, 199 ) ) / 100.0;
                     break;
                 case PlanetSize.SuperJovian:
-                    planet.Diameter = ( this.Dice.Roll( 1, 301, 299 ) ) / 100.0;
+                    planet.Gravity = ( this.Dice.Roll( 1, 301, 299 ) ) / 100.0;
                     break;
             }
         }
