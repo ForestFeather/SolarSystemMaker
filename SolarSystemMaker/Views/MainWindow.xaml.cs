@@ -43,6 +43,8 @@ namespace SolarSystemMaker.Views {
 
         private bool _generatingSystem = false;
 
+        private bool _cancel = false;
+
         #region Constructors
 
         ///-------------------------------------------------------------------------------------------------
@@ -102,9 +104,10 @@ namespace SolarSystemMaker.Views {
         ///-------------------------------------------------------------------------------------------------
         private async void OnClickGenerate(object sender, RoutedEventArgs e) {
             if(_generatingSystem) { MessageBox.Show("Already generating system!"); } else { _generatingSystem = true; }
-            
+
             // Check current variables 
             this.NumSystemsGenerated.Text = "0";
+            _cancel = false;
 
             // Clear out old viewmodels
             this.MainViewModel.ViewModels.Clear();
@@ -174,12 +177,17 @@ namespace SolarSystemMaker.Views {
                     }
                 } else { valid = false; }
 
-                progress.Report(++systemCount);                
-            } while (!valid && counter++ <= maxGenNum);
+                if(++systemCount % 100 == 0) progress.Report(systemCount);                
+            } while (!valid && counter++ <= maxGenNum && !_cancel);
 
+            progress.Report(systemCount);
             if (counter >= maxGenNum)
             {
                 MessageBox.Show(string.Format("Generated over {0} star systems without meeting requirements.  Aborting.", maxGenNum));
+                systemCount = 0;
+            } else if (_cancel)
+            {
+                MessageBox.Show(string.Format("User aborted after generating {0} star systems without meeting requirements.", systemCount));
                 systemCount = 0;
             }
 
@@ -210,6 +218,10 @@ namespace SolarSystemMaker.Views {
                 numHabitablePlanets: numHabitablePlanets,
                 numGoldilocksZonePlanets: numGoldilocksPlanets,
                 maxNumToGenerate: 1));
+        }
+
+        private void OnCancel( object sender, RoutedEventArgs e ) {
+            _cancel = true;
         }
 
         ///-------------------------------------------------------------------------------------------------
