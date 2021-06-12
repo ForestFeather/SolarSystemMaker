@@ -82,6 +82,8 @@
             <Button Click="OnClear" Margin="5" Padding="5 0">Clear</Button>
             <TextBlock VerticalAlignment="Center" Padding="5 0" Text="Number Systems Generated So Far: " />
             <TextBlock VerticalAlignment="Center" x:Name="NumSystemsGenerated" />
+            <TextBlock VerticalAlignment="Center" Padding="5 0" Text=" in " />
+            <TextBlock VerticalAlignment="Center" x:Name="TimeToGenerate" />
         </StackPanel>
         
     </Grid>

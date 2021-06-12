@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,6 +36,7 @@ namespace SolarSystemMaker.Views {
     /// <seealso cref="System.Windows.Window"/>
     ///-------------------------------------------------------------------------------------------------
     public partial class MainWindow : Window {
+        private const string Format = "mm\\:ss\\.fff";
 
         /// <summary>   The generator. </summary>
         private readonly ISystemGenerator _generator;
@@ -45,6 +47,8 @@ namespace SolarSystemMaker.Views {
         private bool _generatingSystem = false;
 
         private bool _cancel = false;
+
+        private Stopwatch _stopwatch;
 
         #region Constructors
 
@@ -70,10 +74,13 @@ namespace SolarSystemMaker.Views {
             simpleSolarGenerator.Initialize();
             this._generator.Initialize();
 
+            this._stopwatch = new Stopwatch();
+
             // set the main viewmodel
             this.MainViewModel = new MainViewModel();
             this.DataContext = this.MainViewModel;
             this.NumSystemsGenerated.Text = "0";
+            this.TimeToGenerate.Text = new TimeSpan().ToString(Format);
         }
 
         #endregion
@@ -90,6 +97,9 @@ namespace SolarSystemMaker.Views {
         private void OnClear(object sender, RoutedEventArgs e)
         {
             this.NumSystemsGenerated.Text = "0";
+            _stopwatch.Reset();
+            this.TimeToGenerate.Text = _stopwatch.Elapsed.ToString(Format);
+
 
             // Clear out old viewmodels
             this.MainViewModel.ViewModels.Clear();
@@ -107,8 +117,13 @@ namespace SolarSystemMaker.Views {
             if(_generatingSystem) { MessageBox.Show("Already generating system!"); } else { _generatingSystem = true; }
 
             // Check current variables 
-            this.NumSystemsGenerated.Text = "0";
+            _stopwatch.Reset();
+            _stopwatch.Start();
             _cancel = false;
+            this.NumSystemsGenerated.Text = "0";
+            this.TimeToGenerate.Text = _stopwatch.Elapsed.ToString(Format);
+            
+            
 
             // Clear out old viewmodels
             this.MainViewModel.ViewModels.Clear();
@@ -199,8 +214,11 @@ namespace SolarSystemMaker.Views {
                 
 
                 progress.Report(systemCount);
+                this.TimeToGenerate.Text = _stopwatch.Elapsed.ToString(Format);
             } while (!found && systemCount <= maxGenNum && !_cancel);
 
+            _stopwatch.Stop();
+            this.TimeToGenerate.Text = _stopwatch.Elapsed.ToString(Format);
             progress.Report(systemCount);
             if (counter >= maxGenNum)
             {
