@@ -15,11 +15,43 @@
 #region Imported Namespaces
 
 using System;
+using System.Linq;
 using System.Threading;
 
 #endregion
 
 namespace SolarSystemLibrary {
+    public sealed class DiceModifiers
+    {
+        private int _curveValue = 1;
+        private int _curveModifier = 0;
+
+        private DiceModifiers()
+        {
+            _curveValue = 1;
+            _curveModifier = 0;
+        }
+
+        private static readonly Lazy<DiceModifiers> lazy = new Lazy<DiceModifiers>(() => new DiceModifiers());
+        public static DiceModifiers Instance {  get { return lazy.Value; } }
+
+        public int CurveValue {  get { return _curveValue; } }
+
+        public int CurveModifier { get { return _curveModifier; } }
+
+        public void SetValues(int curveValue, int curveModifier)
+        {
+            _curveValue = curveValue < 1 ? 1 : curveValue;
+            var tempCurve = 0;
+            if( _curveValue <= Math.Abs(curveModifier))
+            {
+                tempCurve = _curveValue - 1;
+            } else { tempCurve = curveModifier; }
+
+            _curveValue = curveModifier < 0 ? -tempCurve : tempCurve;
+        }
+    }
+    
     ///=================================================================================================
     /// <summary>   Dice roller. </summary>
     ///
@@ -67,10 +99,42 @@ namespace SolarSystemLibrary {
         /// <returns>   . </returns>
         ///=================================================================================================
         public int Roll( int numDie, int numSides, int modifier ) {
+            var modifiers = DiceModifiers.Instance;
+
+            // Gather values for curve estimation
+            int[] vals = new int[modifiers.CurveValue];
+            for (int curve = 0; curve < modifiers.CurveValue; curve++)
+            {
+                for (var i = 0; i < numDie; i++)
+                {
+                    vals[curve] += (this._random.Value.Next(numSides) + 1) + modifier;
+                }
+            }
+
+            // Sort
+            Array.Sort(vals);
+
+            // Remove from modifiers
+            if(modifiers.CurveModifier != 0) {
+                var list = vals.ToList();
+                for(var i = 0; i < Math.Abs(modifiers.CurveModifier); i++)
+                {
+                    list.RemoveAt(modifiers.CurveModifier > 0 ? 0 : list.Count - 1);
+                }
+
+                vals = list.ToArray();
+            }
+
+            return (int)vals.Average();
+        }
+
+        public int RollUnmodified(int numDie, int numSides, int modifier)
+        {
             var total = 0;
 
-            for ( var i = 0; i < numDie; i++ ) {
-                total += ( this._random.Value.Next( numSides ) + 1 ) + modifier;
+            for (var i = 0; i < numDie; i++)
+            {
+                total += (this._random.Value.Next(numSides) + 1) + modifier;
             }
 
             return total;
