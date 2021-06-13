@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SolarSystemMaker.Views"
         mc:Ignorable="d"
-        Title="GeneratorSettingsView" Height="240" Width="400">
+        Title="Generator Settings" Height="240" Width="400">
     <Window.Resources>
         <Style x:Key="Spacing" TargetType="{x:Type Control}">
             <Setter Property="Control.Margin" Value="5,5,5,5" />
@@ -23,12 +23,12 @@
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Curve Height:" />
-            <Label DockPanel.Dock="Left" Style="{StaticResource Spacing}" Content="{Binding CurveHeight.Value}" />
+            <Label DockPanel.Dock="Left" Style="{StaticResource Spacing}" Content="{Binding ElementName=CurveHeight, Path=Value}" />
             <Slider x:Name="CurveHeight" Style="{StaticResource Spacing}" Minimum="1" Maximum="15" IsSnapToTickEnabled="True" TickFrequency="1"/>
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="0" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Curve Bias:" />
-            <Label DockPanel.Dock="Left" Style="{StaticResource Spacing}" Content="{Binding CurveBias.Value}" />
+            <Label DockPanel.Dock="Left" Style="{StaticResource Spacing}" Content="{Binding ElementName=CurveBias, Path=Value}" />
             <Slider x:Name="CurveBias" Style="{StaticResource Spacing}" Minimum="-15" Maximum="15" IsSnapToTickEnabled="True" TickFrequency="1" />
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="0" LastChildFill="False">

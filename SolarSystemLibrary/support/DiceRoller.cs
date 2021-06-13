@@ -48,7 +48,7 @@ namespace SolarSystemLibrary {
                 tempCurve = _curveValue - 1;
             } else { tempCurve = curveModifier; }
 
-            _curveValue = curveModifier < 0 ? -tempCurve : tempCurve;
+            _curveModifier = curveModifier < 0 ? -tempCurve : tempCurve;
         }
     }
     
