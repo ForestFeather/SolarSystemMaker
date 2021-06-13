@@ -276,6 +276,22 @@ namespace SolarSystemMaker.Views {
             Clipboard.SetText( this._system.ToString( ) );
         }
 
+        private void mnu_Exit(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("Really Quit?","Exit",MessageBoxButton.OKCancel) == MessageBoxResult.OK ) { Application.Current.Shutdown(); }
+        }
+
+        private void mnu_About(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This program created by Collin 'Ridayah' O'Connor as a fun generator project.", "About", MessageBoxButton.OK);
+        }
+
+        private void mnu_GeneratorSettings(object sender, RoutedEventArgs e)
+        {
+            GeneratorSettingsView generatorSettingsView = new GeneratorSettingsView();
+            generatorSettingsView.Show();
+        }
+
         #endregion
     }
 }

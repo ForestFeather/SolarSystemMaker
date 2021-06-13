@@ -19,13 +19,27 @@
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!--<ScrollViewer Grid.Row="0">
             <TextBlock x:Name="Block"></TextBlock>
         </ScrollViewer>-->
-        <Grid Grid.Row="0">
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Exit" Click="mnu_Exit"/>
+                </MenuItem>
+                <MenuItem Header="_Generator">
+                    <MenuItem Header="_Generator Settings..." Click="mnu_GeneratorSettings"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About" Click="mnu_About" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -36,6 +50,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            
                 <DockPanel Grid.Row="0" Grid.Column="0" >
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Stars" />
                 <TextBox x:Name="NumberOfStars" Style="{StaticResource Spacing}" />
@@ -59,7 +74,7 @@
                 <TextBox x:Name="NumGoldilocksPlanets" Style="{StaticResource Spacing}" />
             </DockPanel>
         </Grid>
-        <DockPanel Grid.Row="1" LastChildFill="True">
+        <DockPanel Grid.Row="2" LastChildFill="True">
             <ListView DockPanel.Dock="Left" Style="{StaticResource Spacing}" ItemsSource="{Binding Path=ViewModels}" SelectedItem="{Binding Path=SelectedViewModel}"  MinWidth="120" DisplayMemberPath="DisplayName"/>
             <ContentControl Style="{StaticResource Spacing}" Content="{Binding Path=SelectedViewModel}">
                 <ContentControl.Resources>
@@ -75,7 +90,7 @@
                 </ContentControl.Resources>
             </ContentControl>
         </DockPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
             <Button Click="OnClickGenerate" Margin="5" Padding="5 0">Generate</Button>
             <Button Click="OnCancel" Margin="5" Padding="5 0">Cancel</Button>
             <Button Click="OnCopyToClipboard" Margin="5" Padding="5 0">Copy To Cliboard</Button>

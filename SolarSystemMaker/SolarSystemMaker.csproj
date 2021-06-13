@@ -73,6 +73,9 @@
     <Compile Include="ViewModels\SolarSystemViewModel.cs" />
     <Compile Include="ViewModels\StarViewModel.cs" />
     <Compile Include="Views\EnumDescriptionConverter.cs" />
+    <Compile Include="Views\GeneratorSettingsView.xaml.cs">
+      <DependentUpon>GeneratorSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LunarBodyView.xaml.cs">
       <DependentUpon>LunarBodyView.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
     <Compile Include="Views\StarView.xaml.cs">
       <DependentUpon>StarView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\GeneratorSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LunarBodyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
