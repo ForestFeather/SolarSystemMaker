@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +72,7 @@
     <Compile Include="ViewModels\PlanetViewModel.cs" />
     <Compile Include="ViewModels\SolarSystemViewModel.cs" />
     <Compile Include="ViewModels\StarViewModel.cs" />
+    <Compile Include="Views\EnumDescriptionConverter.cs" />
     <Compile Include="Views\LunarBodyView.xaml.cs">
       <DependentUpon>LunarBodyView.xaml</DependentUpon>
     </Compile>

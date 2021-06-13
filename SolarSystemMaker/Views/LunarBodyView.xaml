@@ -6,9 +6,13 @@
              xmlns:ViewModels="clr-namespace:SolarSystemMaker.ViewModels"
              xmlns:SolarSystemLibrary="clr-namespace:SolarSystemLibrary;assembly=SolarSystemLibrary"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" mc:Ignorable="d" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:views="clr-namespace:SolarSystemMaker.Views" mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800" 
              d:DataContext="{d:DesignInstance Type=ViewModels:LunarBodyViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <views:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -51,7 +55,13 @@
         </Grid.Resources>
         <DockPanel Grid.Row="0" Grid.Column="0" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Planet Size: " />
-            <ComboBox x:Name="PlanetSize" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource PlanetSize}}" SelectedItem="{Binding Path=Size}" />
+            <ComboBox x:Name="PlanetSize" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource PlanetSize}}" SelectedItem="{Binding Path=Size}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </DockPanel>
         <DockPanel Grid.Row="0" Grid.Column="1" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Diameter: " />
@@ -67,15 +77,33 @@
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="1" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Atmospheric Pressure: " />
-            <ComboBox x:Name="AtmosphericPressure" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource AtmosphericPressure}}" SelectedItem="{Binding Path=Pressure}" />
+            <ComboBox x:Name="AtmosphericPressure" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource AtmosphericPressure}}" SelectedItem="{Binding Path=Pressure}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="2" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Toxicity: " />
-            <ComboBox x:Name="Toxicity" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Toxicity}}" SelectedItem="{Binding Path=Toxicity}" />
+            <ComboBox x:Name="Toxicity" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Toxicity}}" SelectedItem="{Binding Path=Toxicity}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="0" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Temperature: " />
-            <ComboBox x:Name="Temperature" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Temperature}}" SelectedItem="{Binding Path=Temperature}" />
+            <ComboBox x:Name="Temperature" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Temperature}}" SelectedItem="{Binding Path=Temperature}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="1" >
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Radiation Level: " />

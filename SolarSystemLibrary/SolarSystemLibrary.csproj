@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="enums\AtmosphericPressure.cs" />
+    <Compile Include="enums\EnumOps.cs" />
     <Compile Include="enums\PlanetSize.cs" />
     <Compile Include="enums\StarCategory.cs" />
     <Compile Include="enums\TechLevel.cs" />

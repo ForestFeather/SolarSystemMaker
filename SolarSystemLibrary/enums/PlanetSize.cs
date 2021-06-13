@@ -12,6 +12,8 @@
 //  
 // ==========================================================================================================
 
+using System.ComponentModel;
+
 namespace SolarSystemLibrary {
     ///=================================================================================================
     /// <summary>   Values that represent PlanetSize. </summary>
@@ -20,42 +22,55 @@ namespace SolarSystemLibrary {
     ///=================================================================================================
     public enum PlanetSize {
         /// <summary>   . </summary>
+        [Description("Asteroid Belt")] 
         AsteroidBelt = 1,
 
         /// <summary>   . </summary>
+        [Description("Sub-Lunar")] 
         SubLunar,
 
         /// <summary>   . </summary>
+        [Description("Lunar")] 
         Lunar,
 
         /// <summary>   . </summary>
+        [Description("Super Lunar")] 
         SuperLunar,
 
         /// <summary>   . </summary>
+        [Description("Sub-Terran")] 
         SubTerran,
 
         /// <summary>   . </summary>
+        [Description("Terran")] 
         Terran,
 
         /// <summary>   . </summary>
+        [Description("Super Terran")] 
         SuperTerran,
 
         /// <summary>   . </summary>
+        [Description("Sub-Jovian")] 
         SubJovian,
 
         /// <summary>   . </summary>
+        [Description("Jovian")] 
         Jovian,
 
         /// <summary>   . </summary>
+        [Description("Super Jovian")] 
         SuperJovian,
 
         /// <summary>   . </summary>
+        [Description("Asteroid")] 
         Asteroid,
 
         /// <summary>   . </summary>
+        [Description("Ring")] 
         Ring,
 
         /// <summary>   . </summary>
+        [Description("Null")] 
         NullSize
     }
 }

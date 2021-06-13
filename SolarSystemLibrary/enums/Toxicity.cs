@@ -12,6 +12,8 @@
 //  
 // ==========================================================================================================
 
+using System.ComponentModel;
+
 namespace SolarSystemLibrary {
     ///=================================================================================================
     /// <summary>   Values that represent Toxicity. </summary>
@@ -20,21 +22,27 @@ namespace SolarSystemLibrary {
     ///=================================================================================================
     public enum Toxicity {
         /// <summary>   . </summary>
+        [Description("Inert Gases")] 
         InertGas = -2,
 
         /// <summary>   . </summary>
+        [Description("Noble Gases")] 
         NobleGas,
 
         /// <summary>   . </summary>
+        [Description("Earth Atmosphere")]
         EarthAtmosphere,
 
         /// <summary>   . </summary>
+        [Description("Mildly Toxic")] 
         MildToxicity,
 
         /// <summary>   . </summary>
+        [Description("Volcanic Ash")] 
         VolcanicAsh,
 
         /// <summary>   . </summary>
+        [Description("Chemical Weapons")] 
         ChemicalWeapon
     }
 }

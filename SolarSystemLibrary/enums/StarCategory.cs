@@ -12,6 +12,8 @@
 //  
 // ==========================================================================================================
 
+using System.ComponentModel;
+
 namespace SolarSystemLibrary {
     ///=================================================================================================
     /// <summary>   Values that represent StarCategory. </summary>
@@ -20,30 +22,39 @@ namespace SolarSystemLibrary {
     ///=================================================================================================
     public enum StarCategory {
         /// <summary>   . </summary>
+        [Description("Red")]
         Red = 1,
 
         /// <summary>   . </summary>
+        [Description("Orange")] 
         Orange,
 
         /// <summary>   . </summary>
+        [Description("Yellow")] 
         Yellow,
 
         /// <summary>   . </summary>
+        [Description("White")]
         White,
 
         /// <summary>   . </summary>
+        [Description("Blue-White")] 
         BlueWhite,
 
         /// <summary>   . </summary>
+        [Description("Blue")] 
         Blue,
 
         /// <summary>   . </summary>
+        [Description("Dwarf")] 
         Dwarf,
 
         /// <summary>   . </summary>
+        [Description("Hypergiant")] 
         Hypergiant,
 
         /// <summary>   . </summary>
+        [Description("Null")] 
         NullCategory
     }
 }
