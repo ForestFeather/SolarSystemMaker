@@ -21,12 +21,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0" >
+        <DockPanel Grid.Row="0" Grid.Column="0" ToolTip="Curve Height denotes a bell curve height.  1 is flat dice rolls, higher values cause successive rolls for averaging creating a bell curve.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Curve Height:" />
             <Label DockPanel.Dock="Left" Style="{StaticResource Spacing}" Content="{Binding ElementName=CurveHeight, Path=Value}" />
             <Slider x:Name="CurveHeight" Style="{StaticResource Spacing}" Minimum="1" Maximum="15" IsSnapToTickEnabled="True" TickFrequency="1"/>
         </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="0" >
+        <DockPanel Grid.Row="1" Grid.Column="0" ToolTip="Curve Bias allows for the curve to be shifted left or right.  Negative values will weight the curve towards low end values, and positive values will weight the curve towards high end values.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Curve Bias:" />
             <Label DockPanel.Dock="Left" Style="{StaticResource Spacing}" Content="{Binding ElementName=CurveBias, Path=Value}" />
             <Slider x:Name="CurveBias" Style="{StaticResource Spacing}" Minimum="-15" Maximum="15" IsSnapToTickEnabled="True" TickFrequency="1" />

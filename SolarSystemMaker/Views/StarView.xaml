@@ -17,7 +17,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -35,7 +34,7 @@
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
         </Grid.Resources>
-        <DockPanel Grid.Row="0" Grid.Column="0" >
+        <DockPanel Grid.Row="0" Grid.Column="0" ToolTip="The color of the star.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Star Color: " />
             <ComboBox x:Name="StarColor" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource StarCategories}}" SelectedItem="{Binding Path=Category}">
                 <ComboBox.ItemTemplate>
@@ -45,11 +44,11 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </DockPanel>
-        <DockPanel Grid.Row="0" Grid.Column="1" >
+        <DockPanel Grid.Row="0" Grid.Column="1" ToolTip="The mass of the sun, measured in multiples of Sol.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Solar Mass: " />
             <xctk:DoubleUpDown x:Name="StarMass" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=SolarMass}" Increment=".05" Minimum="0.01" />
         </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="0" >
+        <DockPanel Grid.Row="1" Grid.Column="0" ToolTip="Denotes if this is a main sequence star.  Main sequence stars are more common.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Main Sequence Star?" />
             <CheckBox x:Name="MainSequence" Style="{StaticResource Spacing}" IsChecked="{Binding Path=MainSequenceStar}" />
         </DockPanel>

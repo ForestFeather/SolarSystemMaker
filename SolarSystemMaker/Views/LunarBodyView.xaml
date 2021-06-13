@@ -53,7 +53,7 @@
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
         </Grid.Resources>
-        <DockPanel Grid.Row="0" Grid.Column="0" >
+        <DockPanel Grid.Row="0" Grid.Column="0" ToolTip="Size of the lunar body.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Planet Size: " />
             <ComboBox x:Name="PlanetSize" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource PlanetSize}}" SelectedItem="{Binding Path=Size}">
                 <ComboBox.ItemTemplate>
@@ -63,19 +63,19 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </DockPanel>
-        <DockPanel Grid.Row="0" Grid.Column="1" >
+        <DockPanel Grid.Row="0" Grid.Column="1" ToolTip="Diameter of the lunar body in miles.  For rings, denotes the width of the ring.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Diameter: " />
             <xctk:DoubleUpDown x:Name="Diameter" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=Diameter}" Increment=".05" Minimum="0.01" />
         </DockPanel>
-        <DockPanel Grid.Row="0" Grid.Column="2" >
+        <DockPanel Grid.Row="0" Grid.Column="2" ToolTip="Gravity of the lunar body, measured in a multiple of Earth's gravity.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Gravity: " />
             <xctk:DoubleUpDown x:Name="Gravity" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=Gravity}" Increment=".05" Minimum="0.01" Maximum="8.00"/>
         </DockPanel>
-        <DockPanel Grid.Row="2" Grid.Column="0" >
-            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Planet Order: " />
+        <DockPanel Grid.Row="2" Grid.Column="0" ToolTip="Order of the lunar body from the planet.  For jovian class planets this can warm up the planet and affect atmosphere.">
+            <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Lunar Order: " />
             <xctk:DoubleUpDown x:Name="PlanetOrder" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=PlanetOrder}" Increment=".05" Minimum="0.01" />
         </DockPanel>
-        <DockPanel Grid.Row="2" Grid.Column="1" >
+        <DockPanel Grid.Row="2" Grid.Column="1" ToolTip="A general range of the lunar body's atmospheric pressure, in equivalences to known or estimated equivalencies.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Atmospheric Pressure: " />
             <ComboBox x:Name="AtmosphericPressure" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource AtmosphericPressure}}" SelectedItem="{Binding Path=Pressure}">
                 <ComboBox.ItemTemplate>
@@ -85,7 +85,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </DockPanel>
-        <DockPanel Grid.Row="2" Grid.Column="2" >
+        <DockPanel Grid.Row="2" Grid.Column="2" ToolTip="General toxicity of the lunar body's atmosphere.  Anything other than middling levels require protective gear.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Toxicity: " />
             <ComboBox x:Name="Toxicity" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Toxicity}}" SelectedItem="{Binding Path=Toxicity}">
                 <ComboBox.ItemTemplate>
@@ -95,7 +95,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </DockPanel>
-        <DockPanel Grid.Row="3" Grid.Column="0" >
+        <DockPanel Grid.Row="3" Grid.Column="0" ToolTip="Average temperature of the lunar body at its midzone.  This will vary between the two boundaries on either side of it depending on the latitude location.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Temperature: " />
             <ComboBox x:Name="Temperature" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource Temperature}}" SelectedItem="{Binding Path=Temperature}">
                 <ComboBox.ItemTemplate>
@@ -105,19 +105,19 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </DockPanel>
-        <DockPanel Grid.Row="3" Grid.Column="1" >
+        <DockPanel Grid.Row="3" Grid.Column="1" ToolTip="Radiation level of the lunar body.  Higher levels are more dangerous; affected by distance from the sun, temperature, and atmosphere levels.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Radiation Level: " />
             <xctk:DoubleUpDown x:Name="RadiationLevel" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=RadiationLevel}" Increment=".05" Minimum="0.01" />
         </DockPanel>
-        <DockPanel Grid.Row="4" Grid.Column="1" >
+        <DockPanel Grid.Row="4" Grid.Column="1" ToolTip="If there is any liquid on the surface, this is how much of the lunar body's surface is covered.  If the planet is not habitable, the liquid may be something other than water such as methane, ammonia, or another item.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Liquid Surface Percentage: " />
             <xctk:DoubleUpDown x:Name="LiquidSurfacePercentage" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=LiquidSurfacePercentage}" Increment=".05" Minimum="0.01" Maximum="100.00"/>
         </DockPanel>
-        <DockPanel Grid.Row="3" Grid.Column="2" >
+        <DockPanel Grid.Row="3" Grid.Column="2" ToolTip="The tilt of the lunar body from straight vertical.  The greater the tilt, the more unbalanced the heating is creating weather patterns.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Axial Tilt: " />
             <xctk:DoubleUpDown x:Name="AxialTilt" Style="{StaticResource Spacing}" FormatString="F2" Value="{Binding Path=AxialTilt}" Increment=".05" Minimum="0.00" Maximum="45.00"/>
         </DockPanel>
-        <DockPanel Grid.Row="4" Grid.Column="0" >
+        <DockPanel Grid.Row="4" Grid.Column="0" ToolTip="Denotes the lunar body is habitable.">
             <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Habitable? " />
             <CheckBox x:Name="Habitable" Style="{StaticResource Spacing}" IsEnabled="False" IsChecked="{Binding Path=Habitable, Mode=OneWay}" />
         </DockPanel>

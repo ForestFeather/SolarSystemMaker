@@ -50,26 +50,25 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-                <DockPanel Grid.Row="0" Grid.Column="0" >
+            <DockPanel Grid.Row="0" Grid.Column="0" ToolTip="Set how many stars should be in the system.">
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Stars" />
                 <TextBox x:Name="NumberOfStars" Style="{StaticResource Spacing}" />
             </DockPanel>         
-            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="MainSequenceStar" Style="{StaticResource Spacing}" Content="Main Sequence Star?" />
-            <CheckBox Grid.Row="0" Grid.Column="2" x:Name="HabitableStar" Style="{StaticResource Spacing}" Content="Habitable Star?" />
-            <DockPanel Grid.Row="0" Grid.Column="3" >
+            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="MainSequenceStar" Style="{StaticResource Spacing}" ToolTip="Ensure this star is a 'Main Sequence' star.  Main sequence stars are more common." VerticalAlignment="Center" Content="Main Sequence Star?" />
+            <CheckBox Grid.Row="0" Grid.Column="2" x:Name="HabitableStar" Style="{StaticResource Spacing}" ToolTip="If checked, ensure the star type has the chance to have habitable planets." VerticalAlignment="Center" Content="Habitable Star?" />
+            <DockPanel Grid.Row="0" Grid.Column="3" ToolTip="Determine the star's color.">
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Star Color" />
                 <ComboBox x:Name="StarColor" Style="{StaticResource Spacing}" ItemsSource="{Binding Source={StaticResource StarCategories}}" IsEnabled="False" />
             </DockPanel>
-            <DockPanel Grid.Row="1" Grid.Column="0" >
+            <DockPanel Grid.Row="1" Grid.Column="0" ToolTip="Set how many planets the star should have at minimum.">
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Planets" />
                 <TextBox x:Name="NumPlanets" Style="{StaticResource Spacing}" />
             </DockPanel>
-            <DockPanel Grid.Row="1" Grid.Column="1" >
+            <DockPanel Grid.Row="1" Grid.Column="1" ToolTip="Set how many habitable planets the star should have at minimum.">
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Habitable Planets" />
                 <TextBox x:Name="NumHabitablePlanets" Style="{StaticResource Spacing}" />
             </DockPanel>
-            <DockPanel Grid.Row="1" Grid.Column="2" >
+            <DockPanel Grid.Row="1" Grid.Column="2" ToolTip="Set how many planets are in the goldilocks zone.  By default, this will be 1.">
                 <Label DockPanel.Dock="Left"  Style="{StaticResource Spacing}" Content="Number of Goldilocks Planets" />
                 <TextBox x:Name="NumGoldilocksPlanets" Style="{StaticResource Spacing}" />
             </DockPanel>
