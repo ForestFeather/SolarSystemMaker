@@ -1,82 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D65E2FB4-970F-4390-BBA7-541AD4248A26}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolarSystemLibrary</RootNamespace>
-    <AssemblyName>SolarSystemLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="enums\AtmosphericPressure.cs" />
-    <Compile Include="enums\EnumOps.cs" />
-    <Compile Include="enums\PlanetSize.cs" />
-    <Compile Include="enums\StarCategory.cs" />
-    <Compile Include="enums\TechLevel.cs" />
-    <Compile Include="enums\Temperature.cs" />
-    <Compile Include="enums\Toxicity.cs" />
-    <Compile Include="Generators\SimpleLunarGenerator.cs" />
-    <Compile Include="Generators\SimplePlanetGenerator.cs" />
-    <Compile Include="Generators\SimpleSolarGenerator.cs" />
-    <Compile Include="Generators\SimpleSolarSystemGenerator.cs" />
-    <Compile Include="Models\interfaces\IPlanetaryBody.cs" />
-    <Compile Include="Models\interfaces\ISolarSystem.cs" />
-    <Compile Include="Models\interfaces\IStar.cs" />
-    <Compile Include="Models\LunarBody.cs" />
-    <Compile Include="Models\Planet.cs" />
-    <Compile Include="Models\SolarSystem.cs" />
-    <Compile Include="Models\Star.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="support\DiceRoller.cs" />
-    <Compile Include="support\interfaces\ILunarGenerator.cs" />
-    <Compile Include="support\interfaces\IPlanetaryGenerator.cs" />
-    <Compile Include="support\interfaces\ISolarGenerator.cs" />
-    <Compile Include="support\interfaces\ISystemGenerator.cs" />
-    <Compile Include="support\RollArrayFinder.cs" />
-    <Compile Include="support\RollArrayItem.cs" />
-    <Compile Include="support\RollArrays.cs" />
+    <Compile Remove="Generators\interfaces\ILunarGenerator.cs" />
+    <Compile Remove="Generators\interfaces\IPlanetaryGenerator.cs" />
+    <Compile Remove="Generators\interfaces\ISolarGenerator.cs" />
+    <Compile Remove="Generators\interfaces\ISystemGenerator.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

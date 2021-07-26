@@ -63,6 +63,8 @@ namespace SolarSystemLibrary.Models {
         ///=================================================================================================
         public double SolarMass { get; set; }
 
+        public IConstruct? Construct { get; set; }
+
         #endregion
 
         #region Overrides of Object
@@ -81,10 +83,11 @@ namespace SolarSystemLibrary.Models {
         public override string ToString( ) {
             return
                 string.Format(
-                    "Star Size: {0}\r\n\tSolar Mass: {1}\t\tMain Sequence Star: {2}\r\n",
+                    "Star Size: {0}\r\n\tSolar Mass: {1}\t\tMain Sequence Star: {2}{3}\r\n",
                     this.Category,
                     this.SolarMass,
-                    this.MainSequenceStar );
+                    this.MainSequenceStar,
+                    Construct != null ? "\r\n\tConstruct: " + Construct : "");
         }
 
         #endregion

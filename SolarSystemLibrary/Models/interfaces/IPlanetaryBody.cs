@@ -146,6 +146,7 @@ namespace SolarSystemLibrary.Models {
         ///=================================================================================================
         double AxialTilt { get; set; }
 
+        IList<IConstruct> Constructs { get; set; }
         #endregion
     }
 }

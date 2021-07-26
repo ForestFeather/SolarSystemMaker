@@ -15,6 +15,7 @@
 #region Imported Namespaces
 
 using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
@@ -46,6 +47,7 @@ namespace SolarSystemLibrary.Models {
             this.RadiationLevel = -1;
             this.LiquidSurfacePercentage = 0.0;
             this.AxialTilt = 0.0;
+            this.Constructs = new List<IConstruct>();
         }
 
         #endregion
@@ -190,6 +192,8 @@ namespace SolarSystemLibrary.Models {
         ///=================================================================================================
         public double AxialTilt { get; set; }
 
+        public IList<IConstruct> Constructs { get; set; }
+
         #endregion
 
         #region Members
@@ -242,10 +246,12 @@ namespace SolarSystemLibrary.Models {
         /// <seealso cref="object.ToString()"/>
         ///=================================================================================================
         public override string ToString( ) {
+            string construct_result = this.Constructs.Aggregate("", (current, body) => current + body.ToString());
+
             return
                 string.Format(
                     "Lunar Body Kind: {0}\r\n\tDiameter: {1} miles\t\tGravity: {2}G\r\n\tOrder: {3}\t\tAtmospheric Pressure: {4}\r\n\tToxicity: {5}\t\tAverage Temperature: {6}\r\n\t" +
-                    "Radiation Level: {7}\t\tHabitability: {8}\r\n\tPercentage of Surface Liquid: {9}\r\n\tAxial Tilt: {10}\r\n",
+                    "Radiation Level: {7}\t\tHabitability: {8}\r\n\tPercentage of Surface Liquid: {9}\r\n\tAxial Tilt: {10}\r\n\tNumber of Constructs: {11}\r\n\tConstructs: {12}\r\n",
                     this.Size,
                     this.Diameter,
                     this.Gravity,
@@ -256,7 +262,10 @@ namespace SolarSystemLibrary.Models {
                     this.RadiationLevel,
                     this.Habitable,
                     this.LiquidSurfacePercentage,
-                    this.AxialTilt );
+                    this.AxialTilt,
+                    this.Constructs.Count,
+                    construct_result
+                    );
         }
 
         #endregion

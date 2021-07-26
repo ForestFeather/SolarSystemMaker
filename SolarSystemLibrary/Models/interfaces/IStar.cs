@@ -42,6 +42,8 @@ namespace SolarSystemLibrary.Models {
         ///=================================================================================================
         double SolarMass { get; set; }
 
+        IConstruct? Construct { get; set; }
+
         #endregion
     }
 }

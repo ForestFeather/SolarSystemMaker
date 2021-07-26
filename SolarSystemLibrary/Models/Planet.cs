@@ -15,6 +15,7 @@
 #region Imported Namespaces
 
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 #endregion
@@ -46,6 +47,7 @@ namespace SolarSystemLibrary.Models {
             this.RadiationLevel = -1;
             this.LiquidSurfacePercentage = 0.0;
             this.AxialTilt = 0.0;
+            this.Constructs = new List<IConstruct>();
         }
 
         #endregion
@@ -191,6 +193,8 @@ namespace SolarSystemLibrary.Models {
         ///=================================================================================================
         public double AxialTilt { get; set; }
 
+        public IList<IConstruct> Constructs { get; set; }
+
         #endregion
 
         #region Members
@@ -238,15 +242,17 @@ namespace SolarSystemLibrary.Models {
         ///     A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
         ///=================================================================================================
-        public override string ToString( ) {
+        public override string ToString() {
             string result = this.LunarBodies.Aggregate(
                 "",
-                ( current, body ) =>
+                (current, body) =>
                 current +
-                ( ( this.Size == PlanetSize.SubJovian || this.Size == PlanetSize.Jovian ||
-                    this.Size == PlanetSize.SuperJovian ) && body.Size == PlanetSize.Asteroid
+                ((this.Size == PlanetSize.SubJovian || this.Size == PlanetSize.Jovian ||
+                    this.Size == PlanetSize.SuperJovian) && body.Size == PlanetSize.Asteroid
                       ? string.Empty
-                      : body.ToString( ) ) );
+                      : body.ToString()));
+            string construct_result = this.Constructs.Aggregate("", (current, body) => current + body.ToString());
+            
             return
                 string.Format(
                     "Planetary Body Kind: {0}\r\n\t" +
@@ -257,7 +263,8 @@ namespace SolarSystemLibrary.Models {
                     "Percentage of Surface Liquid: {9}\r\n\t" +
                     "Axial Tilt: {10}\t\tNumber of Moons: {11}\r\n\t" +
                     "Numer of Rings: {12}\t\tNumber of Asteroids: {13}\r\n\t" +
-                    "Total Lunar Body Count: {14}\r\n\tLunar Bodies:\r\n{15}",
+                    "Total Lunar Body Count: {14}\r\n\tLunar Bodies:\r\n{15}\r\n\t" +
+                    "Total Constructs: {16}\r\n\tConstructs:\r\n{17}",
                     this.Size,
                     this.Diameter,
                     this.Gravity,
@@ -273,7 +280,9 @@ namespace SolarSystemLibrary.Models {
                     this.NumRings,
                     this.NumAsteroids,
                     this.LunarBodies.Count,
-                    result );
+                    result,
+                    this.Constructs.Count,
+                    construct_result);
         }
 
         #endregion
