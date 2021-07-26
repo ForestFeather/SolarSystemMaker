@@ -325,6 +325,8 @@ namespace SolarSystemMaker.ViewModels {
             }
         }
 
+        public IList<IConstruct> Constructs { get => DomainObject.Constructs; set { DomainObject.Constructs = value; this.OnPropertyChanged("Constructs"); } }
+
         #endregion
     }
 }
